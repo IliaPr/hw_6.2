@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Обратная связь</title>
-</head>
+{% extends 'catalog/base.html' %}
 <body>
+    {% block content %}
     <h1>Обратная связь</h1>
     <p>Заполните эту форму, чтобы связаться с нами.</p>
     <form>
@@ -15,5 +12,6 @@
         <textarea id="message" name="message"></textarea><br><br>
         <input type="submit" value="Send">
     </form>
+    {% endblock %}
 </body>
 </html>

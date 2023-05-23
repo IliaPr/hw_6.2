@@ -16,7 +16,7 @@ def contact_page(request):
 def product(request, pk):
     product_item = Product.objects.get(pk=pk)
     context = {
-        'object': product_item,
-        'title': product_item.name
+        'title': product_item.name,
+        'desc': product_item.description,
     }
     return render(request, 'catalog/product.html', context)

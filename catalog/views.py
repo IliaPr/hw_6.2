@@ -1,26 +1,40 @@
 from django.shortcuts import render
 
-from catalog.models import Product
+from catalog.models import Product, Contact
+from django.views.generic import ListView, DetailView
+
 
 
 # Create your views here.
-def home_page(request):
-    context = {
-        'object_list': Product.objects.all()
-    }
-    return render(request, 'catalog/home.html', context)
+
+class HomeListView(ListView):
+    model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object_list'] = Product.objects.all()
+        return context
+
+class ContactListView(ListView):
+    model = Contact
 
 def contact_page(request):
     return render(request, 'catalog/contact.html')
 
-def product(request, pk=None):
-    product_item = Product.objects.get(pk=pk)
-    context = {
-        'title': product_item.name,
-        'desc': product_item.description,
-        'category': product_item.category,
-        'price': product_item.price,
-        'create_date': product_item.create_date,
-        'change_date': product_item.change_date,
-    }
-    return render(request, 'catalog/product.html', context)
+class ProductListView(ListView):
+    model = Product
+
+class ProductDetailView(DetailView):
+    model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.object.name
+        context['desc'] = self.object.description
+        context['category'] = self.object.category
+        context['price'] = self.object.price
+        context['create_date'] = self.object.create_date
+        context['change_date'] = self.object.change_date
+        return context
+
+

@@ -1,0 +1,17 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<html>
+<head>
+    <title>Создать продукт</title>
+</head>
+<body>
+    <h1>Создать новый продукт</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Создать</button>
+    </form>
+</body>
+</html>
+{% endblock %}

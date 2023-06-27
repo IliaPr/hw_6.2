@@ -49,12 +49,20 @@ class UserRegisterView(CreateView):
         activation_url = reverse_lazy('users:confirm_email', kwargs={'uidb64': uid, 'token': token})
 
         send_mail(
-            subject='Подтверждение почты',
-            message=f'Для подтверждения регистрации перейдите по ссылке: http://localhost:8000/{activation_url}',
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[self.object.email],
-            fail_silently=False
+            'Подтверждение почты',
+            f'Для подтверждения регистрации перейдите по ссылке: http://localhost:8000/{activation_url}',
+            settings.EMAIL_HOST_USER,
+            [self.object.email],
+            fail_silently=False,
         )
+
+        #send_mail(
+            #subject='Подтверждение почты',
+            #message=f'Для подтверждения регистрации перейдите по ссылке: http://localhost:8000/{activation_url}',
+            #from_email=settings.EMAIL_HOST_USER,
+            #recipient_list=[self.object.email],
+            #fail_silently=False
+        #)
         return redirect('users:email_confirmation_sent')
 
 

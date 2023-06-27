@@ -130,11 +130,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'django.sendmail@yandex.ru'
-EMAIL_HOST_PASSWORD = 'dlpxppnlljlmanrk' #необходимо в настройках аккаунта яндекс, проставить галочки во вкладке "почтовые программы"
-EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "auth.infocatalog@gmail.com"
+EMAIL_HOST_PASSWORD = "ssjqdsogvaxibybp"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/users/'

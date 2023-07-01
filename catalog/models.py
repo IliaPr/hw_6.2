@@ -19,6 +19,13 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    ACTIVE = 'Активна'
+    NO_ACTIVE = 'Не активна'
+
+    SELECT_STATUS = [
+        (ACTIVE, 'Активна'),
+        (NO_ACTIVE, 'Не активна'),
+    ]
     name = models.CharField(max_length=150, verbose_name= 'наименование')
     description = models.TextField(verbose_name='описание')
     image = models.ImageField(upload_to='products/', verbose_name='изображение', **NULLABLE)
@@ -26,6 +33,8 @@ class Product(models.Model):
     price = models.FloatField(verbose_name='Цена за покупку')
     create_date = models.DateField(verbose_name='Дата создания')
     change_date = models.DateField(verbose_name='Дата последнего изменения')
+    status = models.CharField(max_length=50, default = NO_ACTIVE, choices = SELECT_STATUS, verbose_name='Статус')
+    user = models.CharField(max_length=50, verbose_name='Создатель', **NULLABLE)
 
     def __str__(self):
         return f'{self.name}: {self.price}; {self.category}'
@@ -78,14 +87,14 @@ class Record(models.Model):
         self.save()
 
 class Version(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
-    version_number = models.CharField(max_length=20, verbose_name='Номер версии')
-    name = models.CharField(max_length=150, verbose_name='Название версии')
-    is_active = models.BooleanField(verbose_name='Признак текущей версии')
+    name_of_product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
+    number_of_version = models.CharField(max_length=20, verbose_name='Номер версии')
+    title_of_version = models.CharField(max_length=150, verbose_name='Название версии')
+    actual_version = models.BooleanField(verbose_name='Признак текущей версии')
 
     class Meta:
         verbose_name = 'Версия'
         verbose_name_plural = 'Версии'
 
     def __str__(self):
-        return self.name
+        return self.title_of_version
